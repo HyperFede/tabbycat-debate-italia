@@ -46,7 +46,7 @@ export default {
       })
     },
     ajaxError: function (message, responseText, textStatus, errorThrown) {
-      let error = 'of a server error' // Default error
+      let error = 'of a server error' + csrftoken // Default error
       let errorTitle = errorThrown
       if (errorThrown === '' || typeof (responseText) === 'undefined') {
         errorTitle = 'Server Error'
