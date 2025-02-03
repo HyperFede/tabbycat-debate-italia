@@ -56,6 +56,9 @@ CACHES = {
         "LOCATION": "redis://" + REDIS_HOST + ":" + REDIS_PORT,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {
+                "ssl_cert_reqs": None
+            },
             "SOCKET_CONNECT_TIMEOUT": 5,
             "SOCKET_TIMEOUT": 60,
             "IGNORE_EXCEPTIONS": True, # Don't crash on say ConnectionError due to limits

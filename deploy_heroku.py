@@ -63,7 +63,7 @@ config_group.add_argument("--tab-cache-timeout", type=int, default=None, metavar
                           help="Set the tab page cache timeout to TIMEOUT")
 config_group.add_argument("--enable-debug", action="store_true", default=False,
                           help="Enable Django debug pages")
-config_group.add_argument("--time-zone", type=str, default="Australia/Melbourne",
+config_group.add_argument("--time-zone", type=str, default="Europe/Rome",
                           help="Time zone name from the IANA tz database")
 
 # Import tournament arguments are copied from importtournament.py, and should be
@@ -159,7 +159,7 @@ if sys.version_info >= (3, 3) and shutil.which("heroku") is None:
 
 # Create the app with addons
 addons = ["papertrail", "heroku-postgresql:%s" % args.pg_plan, "rediscloud:30", "heroku-redis:mini"]
-command = ["heroku", "apps:create", "--stack", "heroku-22"]
+command = ["heroku", "apps:create", "--stack", "heroku-22", "--region", "eu"]
 
 if addons:
     command.extend(["--addons", ",".join(addons)])
@@ -211,8 +211,11 @@ print_yellow("Waiting for Heroku Redis to provision (may take up to 5 minutes)..
 
 while not redis_provisioned:
     time.sleep(30)
-    redis_output = subprocess.check_output(redis_status_command).decode().split("\n")
-    redis_provisioned = "available" in redis_output[2]
+    print(redis_status_command)
+    redis_output = subprocess.check_output(redis_status_command, **subprocess_kwargs).decode().split("\n")
+    print(redis_output)
+    print(redis_output[3])
+    redis_provisioned = "available" in redis_output[3]
 
 print("Heroku Redis is available, starting deployment")
 
