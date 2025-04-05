@@ -670,7 +670,7 @@ class PersonCheckinMixin:
         def has_permission(self, request, view):
             return view.tournament.pref('participant_ballots') == 'private-urls' and view.participant_requester and request.method != 'POST'
 
-    authentication_classes = [URLKeyAuthentication]
+    #authentication_classes = [URLKeyAuthentication]
     permission_classes = [APIEnabledPermission, CustomPermission | PerTournamentPermissionRequired | IsAdminUser]
 
     @property
@@ -1020,7 +1020,7 @@ class BallotViewSet(RoundAPIMixin, TournamentPublicAPIMixin, ModelViewSet):
     tournament_field = 'debate__round__tournament'
     round_field = 'debate__round'
 
-    authentication_classes = [URLKeyAuthentication]
+    #authentication_classes = [URLKeyAuthentication]
     permission_classes = [APIEnabledPermission, PublicPreferencePermission | CustomPermission | PerTournamentPermissionRequired]
 
     list_permission = Permission.VIEW_BALLOTSUBMISSIONS
@@ -1145,7 +1145,7 @@ class FeedbackViewSet(TournamentAPIMixin, AdministratorAPIMixin, ModelViewSet):
     action_log_type_created = ActionLogEntry.ActionType.FEEDBACK_SAVE
     action_log_type_updated = ActionLogEntry.ActionType.FEEDBACK_SAVE
 
-    authentication_classes = [URLKeyAuthentication]
+    #authentication_classes = [URLKeyAuthentication]
     permission_classes = [APIEnabledPermission, CustomPermission | PerTournamentPermissionRequired | IsAdminUser]
 
     list_permission = Permission.VIEW_FEEDBACK
