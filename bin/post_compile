@@ -9,7 +9,7 @@ echo "-----> I'm post-compile hook"
 cd ./tabbycat/
 
 echo "-----> Running database migration"
-#python manage.py migrate --noinput
+python manage.py migrate --noinput
 
 echo "-----> Running dynamic preferences checks"
 python manage.py checkpreferences
