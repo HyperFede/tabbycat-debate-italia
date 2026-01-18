@@ -97,156 +97,156 @@ class ManyAnswer(Answer):
         verbose_name_plural = _("multiple select answers")
 
 
-# class Question(models.Model):
-#     # When adding or changing an answer type, here are the other places you need
-#     # to edit:
-#     #   - forms.py : BaseFeedbackForm._make_question_field()
-#     #   - importer/importers/anorak.py : AnorakTournamentDataImporter.FEEDBACK_ANSWER_TYPES
+class Question(models.Model):
+    # When adding or changing an answer type, here are the other places you need
+    # to edit:
+    #   - forms.py : BaseFeedbackForm._make_question_field()
+    #   - importer/importers/anorak.py : AnorakTournamentDataImporter.FEEDBACK_ANSWER_TYPES
 
-#     CONTENT_TYPE_CHOICES = models.Q(app_label='adjfeedback', model='adjudicatorfeedback')
+    CONTENT_TYPE_CHOICES = models.Q(app_label='adjfeedback', model='adjudicatorfeedback')
 
-#     ANSWER_TYPE_BOOLEAN_CHECKBOX = 'bc'
-#     ANSWER_TYPE_BOOLEAN_SELECT = 'bs'
-#     ANSWER_TYPE_INTEGER_TEXTBOX = 'i'
-#     ANSWER_TYPE_INTEGER_SCALE = 'is'
-#     ANSWER_TYPE_FLOAT = 'f'
-#     ANSWER_TYPE_TEXT = 't'
-#     ANSWER_TYPE_LONGTEXT = 'tl'
-#     ANSWER_TYPE_SINGLE_SELECT = 'ss'
-#     ANSWER_TYPE_MULTIPLE_SELECT = 'ms'
-#     ANSWER_TYPE_CHOICES = (
-#         (ANSWER_TYPE_BOOLEAN_CHECKBOX, _("checkbox")),
-#         (ANSWER_TYPE_BOOLEAN_SELECT, _("yes/no (dropdown)")),
-#         (ANSWER_TYPE_INTEGER_TEXTBOX, _("integer (textbox)")),
-#         (ANSWER_TYPE_INTEGER_SCALE, _("integer scale")),
-#         (ANSWER_TYPE_FLOAT, _("float")),
-#         (ANSWER_TYPE_TEXT, _("text")),
-#         (ANSWER_TYPE_LONGTEXT, _("long text")),
-#         (ANSWER_TYPE_SINGLE_SELECT, _("select one")),
-#         (ANSWER_TYPE_MULTIPLE_SELECT, _("select multiple")),
-#     )
-#     ANSWER_TYPE_CLASSES = {
-#         ANSWER_TYPE_BOOLEAN_CHECKBOX: BooleanAnswer,
-#         ANSWER_TYPE_BOOLEAN_SELECT: BooleanAnswer,
-#         ANSWER_TYPE_INTEGER_TEXTBOX: IntegerAnswer,
-#         ANSWER_TYPE_INTEGER_SCALE: IntegerAnswer,
-#         ANSWER_TYPE_FLOAT: FloatAnswer,
-#         ANSWER_TYPE_TEXT: StringAnswer,
-#         ANSWER_TYPE_LONGTEXT: StringAnswer,
-#         ANSWER_TYPE_SINGLE_SELECT: StringAnswer,
-#         ANSWER_TYPE_MULTIPLE_SELECT: ManyAnswer,
-#     }
-#     ANSWER_TYPE_CLASSES_REVERSE = {
-#         StringAnswer: [ANSWER_TYPE_TEXT,
-#                                           ANSWER_TYPE_LONGTEXT,
-#                                           ANSWER_TYPE_SINGLE_SELECT],
-#         ManyAnswer: [ANSWER_TYPE_MULTIPLE_SELECT],
-#         IntegerAnswer:
-#         [ANSWER_TYPE_INTEGER_SCALE, ANSWER_TYPE_INTEGER_TEXTBOX],
-#         FloatAnswer: [ANSWER_TYPE_FLOAT],
-#         BooleanAnswer:
-#         [ANSWER_TYPE_BOOLEAN_SELECT, ANSWER_TYPE_BOOLEAN_CHECKBOX],
-#     }
-#     NUMERICAL_ANSWER_TYPES = [ANSWER_TYPE_INTEGER_TEXTBOX, ANSWER_TYPE_INTEGER_SCALE, ANSWER_TYPE_FLOAT]
+    ANSWER_TYPE_BOOLEAN_CHECKBOX = 'bc'
+    ANSWER_TYPE_BOOLEAN_SELECT = 'bs'
+    ANSWER_TYPE_INTEGER_TEXTBOX = 'i'
+    ANSWER_TYPE_INTEGER_SCALE = 'is'
+    ANSWER_TYPE_FLOAT = 'f'
+    ANSWER_TYPE_TEXT = 't'
+    ANSWER_TYPE_LONGTEXT = 'tl'
+    ANSWER_TYPE_SINGLE_SELECT = 'ss'
+    ANSWER_TYPE_MULTIPLE_SELECT = 'ms'
+    ANSWER_TYPE_CHOICES = (
+        (ANSWER_TYPE_BOOLEAN_CHECKBOX, _("checkbox")),
+        (ANSWER_TYPE_BOOLEAN_SELECT, _("yes/no (dropdown)")),
+        (ANSWER_TYPE_INTEGER_TEXTBOX, _("integer (textbox)")),
+        (ANSWER_TYPE_INTEGER_SCALE, _("integer scale")),
+        (ANSWER_TYPE_FLOAT, _("float")),
+        (ANSWER_TYPE_TEXT, _("text")),
+        (ANSWER_TYPE_LONGTEXT, _("long text")),
+        (ANSWER_TYPE_SINGLE_SELECT, _("select one")),
+        (ANSWER_TYPE_MULTIPLE_SELECT, _("select multiple")),
+    )
+    ANSWER_TYPE_CLASSES = {
+        ANSWER_TYPE_BOOLEAN_CHECKBOX: BooleanAnswer,
+        ANSWER_TYPE_BOOLEAN_SELECT: BooleanAnswer,
+        ANSWER_TYPE_INTEGER_TEXTBOX: IntegerAnswer,
+        ANSWER_TYPE_INTEGER_SCALE: IntegerAnswer,
+        ANSWER_TYPE_FLOAT: FloatAnswer,
+        ANSWER_TYPE_TEXT: StringAnswer,
+        ANSWER_TYPE_LONGTEXT: StringAnswer,
+        ANSWER_TYPE_SINGLE_SELECT: StringAnswer,
+        ANSWER_TYPE_MULTIPLE_SELECT: ManyAnswer,
+    }
+    ANSWER_TYPE_CLASSES_REVERSE = {
+        StringAnswer: [ANSWER_TYPE_TEXT,
+                                          ANSWER_TYPE_LONGTEXT,
+                                          ANSWER_TYPE_SINGLE_SELECT],
+        ManyAnswer: [ANSWER_TYPE_MULTIPLE_SELECT],
+        IntegerAnswer:
+        [ANSWER_TYPE_INTEGER_SCALE, ANSWER_TYPE_INTEGER_TEXTBOX],
+        FloatAnswer: [ANSWER_TYPE_FLOAT],
+        BooleanAnswer:
+        [ANSWER_TYPE_BOOLEAN_SELECT, ANSWER_TYPE_BOOLEAN_CHECKBOX],
+    }
+    NUMERICAL_ANSWER_TYPES = [ANSWER_TYPE_INTEGER_TEXTBOX, ANSWER_TYPE_INTEGER_SCALE, ANSWER_TYPE_FLOAT]
 
-#     tournament = models.ForeignKey('tournaments.Tournament', models.CASCADE,
-#         verbose_name=_("tournament"))
-#     for_content_type = models.ForeignKey(ContentType, models.CASCADE,
-#         limit_choices_to=CONTENT_TYPE_CHOICES,
-#         verbose_name=_("for content type"))
-#     seq = models.IntegerField(help_text="The order in which questions are displayed",
-#         verbose_name=_("sequence number"))
-#     text = models.CharField(max_length=255,
-#         verbose_name=_("text"),
-#         help_text=_("The question displayed to participants, e.g., \"Did you agree with the decision?\""))
-#     name = models.CharField(max_length=30,
-#         verbose_name=_("name"),
-#         help_text=_("A short name for the question, e.g., \"Agree with decision\""))
+    tournament = models.ForeignKey('tournaments.Tournament', models.CASCADE,
+        verbose_name=_("tournament"))
+    for_content_type = models.ForeignKey(ContentType, models.CASCADE,
+        limit_choices_to=CONTENT_TYPE_CHOICES,
+        verbose_name=_("for content type"))
+    seq = models.IntegerField(help_text="The order in which questions are displayed",
+        verbose_name=_("sequence number"))
+    text = models.CharField(max_length=255,
+        verbose_name=_("text"),
+        help_text=_("The question displayed to participants, e.g., \"Did you agree with the decision?\""))
+    name = models.CharField(max_length=30,
+        verbose_name=_("name"),
+        help_text=_("A short name for the question, e.g., \"Agree with decision\""))
 
-#     answer_type = models.CharField(max_length=2, choices=ANSWER_TYPE_CHOICES,
-#         verbose_name=_("answer type"))
-#     required = models.BooleanField(default=True,
-#         verbose_name=_("required"),
-#         help_text=_("Whether participants are required to fill out this field"))
-#     min_value = models.FloatField(blank=True, null=True,
-#         verbose_name=_("minimum value"),
-#         help_text=_("Minimum allowed value for numeric fields (ignored for text or boolean fields)"))
-#     max_value = models.FloatField(blank=True, null=True,
-#         verbose_name=_("maximum value"),
-#         help_text=_("Maximum allowed value for numeric fields (ignored for text or boolean fields)"))
+    answer_type = models.CharField(max_length=2, choices=ANSWER_TYPE_CHOICES,
+        verbose_name=_("answer type"))
+    required = models.BooleanField(default=True,
+        verbose_name=_("required"),
+        help_text=_("Whether participants are required to fill out this field"))
+    min_value = models.FloatField(blank=True, null=True,
+        verbose_name=_("minimum value"),
+        help_text=_("Minimum allowed value for numeric fields (ignored for text or boolean fields)"))
+    max_value = models.FloatField(blank=True, null=True,
+        verbose_name=_("maximum value"),
+        help_text=_("Maximum allowed value for numeric fields (ignored for text or boolean fields)"))
 
-#     choices = ArrayField(
-#         base_field=models.TextField(),
-#         blank=True,
-#         verbose_name=_("choices"),
-#         help_text=_("Permissible choices for select one/multiple fields (ignored for other fields)"),
-#         default=list)
+    choices = ArrayField(
+        base_field=models.TextField(),
+        blank=True,
+        verbose_name=_("choices"),
+        help_text=_("Permissible choices for select one/multiple fields (ignored for other fields)"),
+        default=list)
 
-#     answer_type_rels = ['stringanswer_set', 'manyanswer_set', 'integeranswer_set', 'floatanswer_set', 'booleananswer_set']
+    answer_type_rels = ['stringanswer_set', 'manyanswer_set', 'integeranswer_set', 'floatanswer_set', 'booleananswer_set']
 
-#     class Meta:
-#         verbose_name = _("question")
-#         verbose_name_plural = _("questions")
+    class Meta:
+        verbose_name = _("question")
+        verbose_name_plural = _("questions")
 
-#     def __str__(self):
-#         return self.text
+    def __str__(self):
+        return self.text
 
-#     @property
-#     def answer_set(self):
-#         return getattr(self, self.answer_type_class.__name__.lower() + '_set')
+    @property
+    def answer_set(self):
+        return getattr(self, self.answer_type_class.__name__.lower() + '_set')
 
-#     @property
-#     def answer_type_class(self):
-#         return self.ANSWER_TYPE_CLASSES[self.answer_type]
+    @property
+    def answer_type_class(self):
+        return self.ANSWER_TYPE_CLASSES[self.answer_type]
 
-#     @property
-#     def choices_for_field(self):
-#         return tuple((x, x) for x in self.choices)
+    @property
+    def choices_for_field(self):
+        return tuple((x, x) for x in self.choices)
 
-#     @property
-#     def choices_for_number_scale(self):
-#         return self.construct_number_scale(self.min_value, self.max_value)
+    @property
+    def choices_for_number_scale(self):
+        return self.construct_number_scale(self.min_value, self.max_value)
 
-#     def construct_number_scale(self, min_value, max_value):
-#         """Used to build up a semi-intelligent range of options for numeric scales.
-#         Shifted here rather than the class so that it can be more easily used to
-#         construct the default values for printed forms."""
-#         step = max((int(max_value) - int(min_value)) / 10, 1)
-#         options = list(range(int(min_value), int(max_value + 1), int(step)))
-#         return options
+    def construct_number_scale(self, min_value, max_value):
+        """Used to build up a semi-intelligent range of options for numeric scales.
+        Shifted here rather than the class so that it can be more easily used to
+        construct the default values for printed forms."""
+        step = max((int(max_value) - int(min_value)) / 10, 1)
+        options = list(range(int(min_value), int(max_value + 1), int(step)))
+        return options
 
 
-# class AdjudicatorFeedbackQuestion(Question):
+class AdjudicatorFeedbackQuestion(Question):
 
-#     reference = models.SlugField(
-#         verbose_name=_("reference"),
-#         help_text=_("Code-compatible reference, e.g., \"agree_with_decision\""))
+    reference = models.SlugField(
+        verbose_name=_("reference"),
+        help_text=_("Code-compatible reference, e.g., \"agree_with_decision\""))
 
-#     from_adj = models.BooleanField(
-#         verbose_name=_("from adjudicator"),
-#         help_text=_("Adjudicators should be asked this question (about other adjudicators)"))
-#     from_team = models.BooleanField(
-#         verbose_name=_("from team"),
-#         help_text=_("Teams should be asked this question"))
+    from_adj = models.BooleanField(
+        verbose_name=_("from adjudicator"),
+        help_text=_("Adjudicators should be asked this question (about other adjudicators)"))
+    from_team = models.BooleanField(
+        verbose_name=_("from team"),
+        help_text=_("Teams should be asked this question"))
 
-#     class Meta:
-#         verbose_name = _("adjudicator feedback question")
-#         verbose_name_plural = _("adjudicator feedback questions")
+    class Meta:
+        verbose_name = _("adjudicator feedback question")
+        verbose_name_plural = _("adjudicator feedback questions")
 
-#     def serialize(self):
-#         question = {
-#             'text': escape(self.text),
-#             'seq': self.seq,
-#             'type': self.answer_type,
-#             'required': self.answer_type,
-#             'from_team': self.from_team,
-#             'from_adj': self.from_adj,
-#         }
-#         if self.choices:
-#             question['choice_options'] = [escape(c) for c in self.choices]
-#         elif self.min_value is not None and self.max_value is not None:
-#             question['choice_options'] = self.choices_for_number_scale
-#         return question
+    def serialize(self):
+        question = {
+            'text': escape(self.text),
+            'seq': self.seq,
+            'type': self.answer_type,
+            'required': self.answer_type,
+            'from_team': self.from_team,
+            'from_adj': self.from_adj,
+        }
+        if self.choices:
+            question['choice_options'] = [escape(c) for c in self.choices]
+        elif self.min_value is not None and self.max_value is not None:
+            question['choice_options'] = self.choices_for_number_scale
+        return question
 
 
 class AdjudicatorFeedback(Submission):
