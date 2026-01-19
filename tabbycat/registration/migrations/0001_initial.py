@@ -216,8 +216,8 @@ class Migration(migrations.Migration):
         migrations.SeparateDatabaseAndState(
             database_operations=[
                 migrations.RunSQL(
-                    f"ALTER INDEX adjfeed_stringanswer_question__content_type__object_id_uniq RENAME TO registr_answer_question__content_type__object_id_uniq;",
-                    f"ALTER INDEX registr_answer_question__content_type__object_id_uniq RENAME TO adjfeed_stringanswer_question__content_type__object_id_uniq;",
+                    f"ALTER INDEX adjfeed_adjudicatorfeedbackstringanswer_question__content_type_ RENAME TO registr_answer_question__content_type__object_id_uniq;",
+                    f"ALTER INDEX registr_answer_question__content_type__object_id_uniq RENAME TO adjfeed_adjudicatorfeedbackstringanswer_question__content_type_;",
                 ),
             ],
             state_operations=[
